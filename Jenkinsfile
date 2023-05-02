@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'sathishbs/springbootapp:v1'
+      image 'maven:3.8.3-openjdk-17'
       args '--user root -v /var/run/docker.sock:/var/run.docker.sock'
     }
   }
@@ -30,7 +30,7 @@ pipeline {
     stage('Build and upload Image') {
       environment {
         DOCKER_IMAGE = "sathishbs/springbootapp:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
+        REGISTRY_CREDENTIALS = credentials('docker-credentials')
       }
       steps {
         script {
