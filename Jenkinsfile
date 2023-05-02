@@ -1,8 +1,10 @@
 pipeline {
   agent {
     docker {
-      image 'maven:latest'
+      image 'sathishbs/baseimage:v1'
       args '--user root -v /var/run/docker.sock:/var/run.docker.sock'
+    }
+    tools {
     }
   }
   stages {
