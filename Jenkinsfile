@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'sathishbs/baseimage:v1'
-      args '--user root -v /var/run/docker.sock:/var/run.docker.sock'
+      args '-v /var/run/docker.sock:/var/run.docker.sock'
     }
   }
   stages {
