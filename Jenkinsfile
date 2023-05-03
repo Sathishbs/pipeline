@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    sh 'cd /home/jenkins'
     docker {
+      sh 'cd /home/jenkins'
       image 'sathishbs/baseimage:v1'
       args '-v /var/run/docker.sock:/var/run.docker.sock'
     }
