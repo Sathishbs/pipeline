@@ -23,8 +23,11 @@ pipeline {
         SONAR_URL = 'http://192.168.1.25:9091'
       }
       steps {
-        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'mvn sonar:sonar -Dsonar.token=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
+          sh '''
+          echo "Executing sonarqube"
+          mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}
+          '''
         }
 
       }
