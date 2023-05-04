@@ -8,11 +8,13 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
+        sh 'ls -ltr'
         // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
       steps {
+        sh 'ls -ltr'
         sh 'mvn clean package'
       }
     }
