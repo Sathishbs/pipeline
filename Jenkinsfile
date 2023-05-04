@@ -8,8 +8,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh 'ls -l'
-//         git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
+//         sh 'Source code already checked out during the pipeline initiated'
+        // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
@@ -23,7 +23,7 @@ pipeline {
         SONAR_URL = 'http://192.168.1.25:9091'
       }
       steps {
-        withCredentials([string(credentialsId: 'sonar', variable: 'sonarqube-token')])
+        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')])
          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
       }
     }
@@ -34,7 +34,7 @@ pipeline {
       }
       steps {
         script {
-          sh 'cd pipeline && docker build -t ${DOCKER_IMAGE} .'
+          sh 'docker build -t ${DOCKER_IMAGE} .'
           def dockerImage = docker.image("${DOCKER_IMAGE}")
           docker.withRegistry('https://index.docker.io/v1', "docker-cred") {
             dockerImage.push()
