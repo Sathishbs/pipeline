@@ -28,5 +28,17 @@ pipeline {
         }
       }
     }
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE="sathishbs/springbootapp:${BUILD_NUMBER}"
+        REGISTRY_CREDENTIALS = credentials('hub-docker-com')
+      }
+      steps {
+        script {
+          sh 'docker build -t ${DOCKER_IMAGE} .'
+          def dockerImage = docker.image("${DOCKER_IMAGE}")
+        }
+      }
+    }
   }  
 }
