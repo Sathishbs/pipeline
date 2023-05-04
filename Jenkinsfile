@@ -18,6 +18,11 @@ pipeline {
         sh 'mvn clean package'
       }
     }
+    stage('Sonar Qube Analysis') {
+      withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'sonar-qube-server') {
+        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+      }
+    }
     stage('Static Code Analysis') {
       environment {
         SONAR_URL = 'http://192.168.1.25:9091'
