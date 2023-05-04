@@ -19,5 +19,9 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apk add git
 RUN apk add maven
+RUN apk add docker.io
 
 ENTRYPOINT ["/bin/ash", "-c"]
+
+
+#docker build -t "sathishbs/springbootapp:v1" .
