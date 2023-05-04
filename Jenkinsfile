@@ -8,13 +8,11 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh 'ls -ltr'
         // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
       steps {
-        sh 'ls -ltr'
         sh 'mvn clean package'
       }
     }
@@ -35,6 +33,7 @@ pipeline {
       }
       steps {
         script {
+          sh 'ls -ltr'
           def dockerImage = docker.build("${DOCKER_IMAGE}")
           dockerImage.push()
         }
