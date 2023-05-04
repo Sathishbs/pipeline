@@ -24,10 +24,7 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
-          sh '''
-          echo "Executing sonarqube"
-          mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}
-          '''
+          sh 'mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
 
       }
