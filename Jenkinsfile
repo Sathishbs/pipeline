@@ -8,8 +8,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh 'Source code already checked out during the pipeline initiated'
-        git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
+        sh "'echo Checking...'"
+//         git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
