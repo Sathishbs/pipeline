@@ -8,23 +8,23 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh 'echo git clone in progress'
+        sh 'Source code already checked out during the pipeline initiated'
         // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
       steps {
         sh 'ls -ltr'
-        sh 'cd pipeline && mvn clean package'
+        sh 'mvn clean package'
       }
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = 'http://192.168.1.25:9000'
+        SONAR_URL = 'http://192.168.1.25:9091'
       }
       steps {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')])
-         sh 'cd pipeline && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        withCredentials([string(credentialsId: 'sonar', variable: 'sonarqube-token')])
+         sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
       }
     }
     stage('Build and upload Image') {
