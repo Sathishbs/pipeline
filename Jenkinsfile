@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh "'echo Checking...'"
+        sh 'ls -l'
 //         git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
