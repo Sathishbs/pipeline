@@ -35,9 +35,9 @@ pipeline {
       }
       steps {
         script {
-
-          sh 'cd springbootapp && docker build -t ${DOCKER_IMAGE} .'
-          def dockerImage = docker.image("${DOCKER_IMAGE}")
+          sh 'cd springbootapp'
+          def dockerImage = docker.build("${DOCKER_IMAGE}")
+          dockerImage.push()
         }
       }
     }
