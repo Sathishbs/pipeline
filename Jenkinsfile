@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-//         sh 'Source code already checked out during the pipeline initiated'
+        sh 'ls -ltr'
         // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
@@ -26,23 +26,7 @@ pipeline {
         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
           sh 'mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
-
       }
     }
-    stage('Build and upload Image') {
-      environment {
-        DOCKER_IMAGE = "sathishbs/springbootapp:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-credentials')
-      }
-      steps {
-        script {
-          sh 'docker build -t ${DOCKER_IMAGE} .'
-          def dockerImage = docker.image("${DOCKER_IMAGE}")
-          docker.withRegistry('https://index.docker.io/v1', "docker-cred") {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-  }
+  }  
 }
