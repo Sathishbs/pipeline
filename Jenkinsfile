@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'sathishbs/baseimage:v1'
+      image 'sathishbs/baseimage:v2'
       args '-v /var/run/docker.sock:/var/run.docker.sock'
     }
   }
@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = 'http://192.168.1.25:9091'
+        SONAR_URL = 'http://192.168.1.25:9000'
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
