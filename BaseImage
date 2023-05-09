@@ -23,4 +23,4 @@ RUN apk add maven
 ENTRYPOINT ["/bin/ash", "-c"]
 
 
-#docker build -t "sathishbs/springbootapp:v1" .
+#docker build -t "sathishbs/baseimage:v1" .
