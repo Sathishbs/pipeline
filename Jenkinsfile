@@ -28,6 +28,7 @@ pipeline {
         }
       }
     }
+    input 'stop'
     stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE="sathishbs/springbootapp:${BUILD_NUMBER}"
