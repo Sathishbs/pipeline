@@ -14,6 +14,7 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
+        echo sh(script: 'env|sort', returnStdout: true)
         sh 'ls -ltr'
         sh 'mvn clean package'
       }
@@ -37,7 +38,7 @@ pipeline {
       }
       steps {
         script {
-          echo sh(script: 'env|sort', returnStdout: true)
+
           sh 'ls -ltr'
           def dockerImage = docker.build("${DOCKER_IMAGE}")
           dockerImage.push()
