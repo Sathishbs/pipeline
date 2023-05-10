@@ -21,7 +21,7 @@ RUN apk add git
 RUN apk add maven
 RUN apk add --update docker openrc
 RUN rc-update add docker boot
-CMD["dokcer --version"]
+RUN CMD["docker --version"]
 ENTRYPOINT ["/bin/ash", "-c"]
 
 
