@@ -19,7 +19,8 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apk add git
 RUN apk add maven
-RUN apk add docker-client
+RUN apk add --update docker openrc
+RUN rc-update add docker boot
 
 ENTRYPOINT ["/bin/ash", "-c"]
 
