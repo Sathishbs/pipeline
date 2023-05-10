@@ -19,6 +19,7 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apk add git
 RUN apk add maven
+RUN apk add docker-client
 
 ENTRYPOINT ["/bin/ash", "-c"]
 
