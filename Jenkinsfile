@@ -30,13 +30,14 @@ pipeline {
     }
 
     stage('Build and Push Docker Image') {
-    input 'stop'
+
       environment {
         DOCKER_IMAGE="sathishbs/springbootapp:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('hub-docker-com')
       }
       steps {
         script {
+          echo sh(script: 'env|sort', returnStdout: true)
           sh 'ls -ltr'
           def dockerImage = docker.build("${DOCKER_IMAGE}")
           dockerImage.push()
