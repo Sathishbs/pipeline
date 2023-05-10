@@ -22,7 +22,12 @@ RUN apk add maven
 RUN apk add --update docker openrc
 RUN rc-update add docker boot
 
-ENTRYPOINT ["/bin/ash", "-c"]
+RUN \
+    echo "#!/bin/ash" > /entrypoint.sh &&\
+    echo "echo 'hello world' | grep ell" >> /entrypoint.sh &&\
+    chmod 755 /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 
-#docker build -t "sathishbs/baseimage:v1" .
+#docker build -f BaseImage -t "sathishbs/baseimage:v1" .
