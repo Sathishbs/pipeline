@@ -1,7 +1,28 @@
-FROM ubuntu:20.04
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends mysql-client \
-    && rm -rf /var/lib/apt/lists/*
-ENTRYPOINT ["mysql"]
+FROM alpine:3.17.3
 
-#docker build -f BaseImage -t "sathishbs/baseimage:v1" .
+# Update packages
+RUN apk update && \
+    apk add --upgrade apk-tools && \
+    apk upgrade --available && \
+    sync
+
+ONBUILD RUN apk update && \
+    apk add --upgrade apk-tools && \
+    apk upgrade --available --ignore openjdk17 openjdk17-jmods openjdk17-demos openjdk17-doc java-common java-cacerts openjdk17-jre-headless openjdk17-jre openjdk17-jdk && \
+    sync
+
+# Install OpenJDK 17
+RUN apk --no-cache add openjdk17 --repository=https://dl-cdn.alpinelinux.org/alpine/v3.17/community
+ENV HOME /root
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+RUN apk add git
+RUN apk add maven
+RUN apk add --update docker openrc
+RUN rc-update add docker boot
+CMD["dokcer --version"]
+ENTRYPOINT ["/bin/ash", "-c"]
+
+
+#docker build -t "sathishbs/baseimage:v1" .
