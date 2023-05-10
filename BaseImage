@@ -1,5 +1,7 @@
-FROM alpine:3.14
+FROM alpine:latest
+
 RUN apk add --no-cache mysql-client
+
 ENTRYPOINT ["mysql"]
 
 #docker build -f BaseImage -t "sathishbs/baseimage:v1" .
