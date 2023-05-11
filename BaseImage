@@ -23,6 +23,7 @@ RUN apk add --update docker openrc
 RUN rc-update add docker boot
 RUN adduser -S sathish
 RUN adduser -S jenkins
+RUN addgroup docker jenkins
 
 ENTRYPOINT ["/bin/ash", "-c"]
 

@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'ls -ltr'
-        // git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
+        git branch: 'main', url: 'https://github.com/Sathishbs/pipeline.git'
       }
     }
     stage('Build and Test') {
@@ -19,16 +19,16 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-    stage('Static Code Analysis') {
-      environment {
-        SONAR_URL = 'http://192.168.1.25:9000'
-      }
-      steps {
-        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
-          sh 'mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}'
-        }
-      }
-    }
+//     stage('Static Code Analysis') {
+//       environment {
+//         SONAR_URL = 'http://192.168.1.25:9000'
+//       }
+//       steps {
+//         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'TOKEN')]) {
+//           sh 'mvn sonar:sonar -Dsonar.token=$TOKEN -Dsonar.host.url=${SONAR_URL}'
+//         }
+//       }
+//     }
 
     stage('Build and Push Docker Image') {
 
