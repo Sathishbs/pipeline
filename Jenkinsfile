@@ -44,5 +44,24 @@ pipeline {
                 }
             }
         }
+        stage("Update Deployment File") {
+            environment {
+                gitRepositoryName = "pipeline"
+                gitUserName = "sathishbs"
+            }
+            steps {
+                withCredentials([string(credentailsId: 'github-token', variable:'GITHUB_TOKEN')]) {
+                    sh '''
+                        git config user.email sathishbs@gmail.com
+                        git config user.name "Sathish Sakshi"
+                        buildNumber = ${BUILD_NUMBER}
+                        sed -i "s/imageTag/${BUILD_NUMBER}/g" deployment.yml
+                        git add deploymeny.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${gitUserName}/${gitRepositoryName} HEAD:main
+                    '''
+                }
+            }
+        }
     }
 }
