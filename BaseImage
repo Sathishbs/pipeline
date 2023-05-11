@@ -24,6 +24,7 @@ RUN rc-update add docker boot
 RUN adduser -S sathish
 RUN adduser -S jenkins
 RUN addgroup jenkins docker
+RUN chown root:docker /var/run/docker.sock
 
 ENTRYPOINT ["/bin/ash", "-c"]
 
