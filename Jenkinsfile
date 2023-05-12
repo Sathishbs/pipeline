@@ -65,5 +65,12 @@ pipeline {
                 }
             }
         }
+        stage("Deploy to Kubernetes") {
+            steps {
+                script {
+                    kubernetesDeploy(configs: "deployment.yml")
+                }
+            }
+        }
     }
 }
