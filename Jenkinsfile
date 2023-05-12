@@ -50,9 +50,6 @@ pipeline {
                 gitUserName = "sathishbs"
             }
             steps {
-                input {
-                    message "Abort or Proceed?"
-                }
                 withCredentials([string(credentialsId: 'github-token', variable:'GITHUB_TOKEN')]) {
                     sh '''
                         git config user.email sathishbs@gmail.com
