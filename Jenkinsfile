@@ -57,8 +57,10 @@ pipeline {
                         git config --global user.email sathishbs@gmail.com
                         git config --global user.name "Sathish Sakshi"
                         git config --global --add safe.directory ${PWD}
+                        git rm deployment.yml
+                        git commit -m "Old Deployment file deleted"
+                        cp deployment-template.yml deployment.yml
                         sed -i "s/imageTag/${BUILD_NUMBER}/g" deployment.yml
-
                         git add deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${gitUserName}/${gitRepositoryName} HEAD:main
