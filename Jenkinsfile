@@ -56,6 +56,7 @@ pipeline {
                         pwd
                         git config --global user.email sathishbs@gmail.com
                         git config --global user.name "Sathish Sakshi"
+                        git config --global --add safe.directory ${PWD}
                         sed -i "s/imageTag/${BUILD_NUMBER}/g" deployment.yml
                         git add deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}
