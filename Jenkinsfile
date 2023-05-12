@@ -54,8 +54,8 @@ pipeline {
                     sh '''
                         ls -ltra
                         pwd
-                        git config user.email sathishbs@gmail.com
-                        git config user.name "Sathish Sakshi"
+                        git config --global user.email sathishbs@gmail.com
+                        git config --global user.name "Sathish Sakshi"
                         buildNumber = ${BUILD_NUMBER}
                         sed -i "s/imageTag/${BUILD_NUMBER}/g" deployment.yml
                         git add deploymeny.yml
