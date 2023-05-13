@@ -66,7 +66,7 @@ pipeline {
                 }
             }
         }
-        stage("Deploy to Kubernetes") {
+        stage("Deploy to Kubernetes ") {
             steps {
                 script {
                     kubernetesDeploy(configs: "deployment.yml")
