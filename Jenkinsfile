@@ -47,7 +47,7 @@ pipeline {
         stage("Update Deployment File") {
             environment {
                 gitRepositoryName = "pipeline"
-                gitUserName = "sathishbs"
+                gitUserName = "Sathishbs"
             }
             steps {
                 withCredentials([string(credentialsId: 'github-token', variable:'GITHUB_TOKEN')]) {
